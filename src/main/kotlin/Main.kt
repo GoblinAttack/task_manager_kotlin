@@ -1,8 +1,13 @@
 package org.example
 
+val tasks = mutableListOf<Task>()
+
+var nextId = 1
+
 fun main() {
 
     var running = true
+
 
     while (running) {
 
@@ -14,7 +19,7 @@ fun main() {
         when (option) {
 
             1 -> {
-                println("Agregar tarea próximamente...")
+                addTask()
             }
 
             2 -> {
@@ -52,4 +57,29 @@ fun showMenu() {
     println("4. Eliminar tarea")
     println("5. Salir")
     println()
+}
+
+fun addTask() {
+
+    print("Ingrese el nombre de la tarea: ")
+
+    val title = readLine()?.trim()
+
+    if (title.isNullOrEmpty()) {
+
+        println("El nombre de la tarea no puede estar vacío.")
+        return
+    }
+
+    val task = Task(
+        id = nextId,
+        title = title,
+        completed = false
+    )
+
+    tasks.add(task)
+
+    println("Tarea agregada correctamente.")
+
+    nextId++
 }
