@@ -9,7 +9,7 @@ fun addTask() {
     val title = readLine()?.trim()
 
     if (title.isNullOrEmpty()) {
-        println("El nombre de la tarea no puede estar vacío.")
+        println("El nombre de la tarea no puede estar vacio.")
         return
     }
 
@@ -22,7 +22,7 @@ fun addTask() {
         "BAJA" -> Priority.BAJA
 
         else -> {
-            println("Prioridad inválida. Se asignará prioridad MEDIA.")
+            println("Prioridad invalida. Se asignara prioridad MEDIA.")
             Priority.MEDIA
         }
     }
@@ -47,12 +47,9 @@ fun listTasks() {
         return
     }
 
-    println("===== LISTA DE TAREAS =====")
+    println("\n===== LISTA DE TAREAS =====")
 
-    tasks.forEach { task ->
-        val status = if (task.completed) "[Completada]" else "[Pendiente]"
-        println("${task.id}. ${task.title} $status - Prioridad: ${task.priority}")
-    }
+    tasks.forEach { task -> printTask(task) }
 }
 
 fun completeTask() {
@@ -72,7 +69,7 @@ fun completeTask() {
         saveTasks(tasks)
         println("Tarea marcada como completada.")
     } else {
-        println("No se encontró una tarea con ese ID.")
+        println("No se encontro una tarea con ese ID.")
     }
 }
 
@@ -93,7 +90,7 @@ fun deleteTask() {
         saveTasks(tasks)
         println("Tarea eliminada correctamente.")
     } else {
-        println("No se encontró una tarea con ese ID.")
+        println("No se encontro una tarea con ese ID.")
     }
 }
 
@@ -107,9 +104,7 @@ fun showCompletedTasks() {
 
     println("===== TAREAS COMPLETADAS =====")
 
-    completedTasks.forEach { task ->
-        println("${task.id}. ${task.title} - Prioridad: ${task.priority}")
-    }
+    completedTasks.forEach { task -> printTask(task) }
 }
 
 fun showPendingTasks() {
@@ -122,9 +117,7 @@ fun showPendingTasks() {
 
     println("===== TAREAS PENDIENTES =====")
 
-    pendingTasks.forEach { task ->
-        println("${task.id}. ${task.title} - Prioridad: ${task.priority}")
-    }
+    pendingTasks.forEach { task -> printTask(task) }
 }
 
 fun searchTasks() {
@@ -138,7 +131,7 @@ fun searchTasks() {
     val keyword = readLine()?.trim()
 
     if (keyword.isNullOrEmpty()) {
-        println("La búsqueda no puede estar vacía.")
+        println("La busqueda no puede estar vacia.")
         return
     }
 
@@ -151,12 +144,9 @@ fun searchTasks() {
         return
     }
 
-    println("===== RESULTADOS DE BÚSQUEDA =====")
+    println("===== RESULTADOS DE BUSQUEDA =====")
 
-    results.forEach { task ->
-        val status = if (task.completed) "[Completada]" else "[Pendiente]"
-        println("${task.id}. ${task.title} $status - Prioridad: ${task.priority}")
-    }
+    results.forEach { task -> printTask(task) }
 }
 
 fun showStatistics() {
@@ -173,11 +163,20 @@ fun showStatistics() {
     val mediumPriorityTasks = tasks.count { it.priority == Priority.MEDIA }
     val lowPriorityTasks = tasks.count { it.priority == Priority.BAJA }
 
-    println("===== ESTADÍSTICAS =====")
+    println("\n===== ESTADISTICAS =====")
     println("Total de tareas: $totalTasks")
     println("Tareas completadas: $completedTasks")
     println("Tareas pendientes: $pendingTasks")
     println("Prioridad Alta: $highPriorityTasks")
     println("Prioridad Media: $mediumPriorityTasks")
     println("Prioridad Baja: $lowPriorityTasks")
+}
+
+fun printTask(task: Task) {
+    val status = if (task.completed) "Completada" else "Pendiente"
+
+    println("[${task.id}] ${task.title}")
+    println("Estado: $status")
+    println("Prioridad: ${task.priority}")
+    println("----------------------------------------")
 }

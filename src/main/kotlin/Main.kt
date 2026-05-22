@@ -5,7 +5,7 @@ fun main() {
 
     while (running) {
         showMenu()
-        print("Seleccione una opción: ")
+        print("Seleccione una opcion: ")
         val option = readLine()?.toIntOrNull()
 
         when (option) {
@@ -21,7 +21,7 @@ fun main() {
                 println("Saliendo del programa...")
                 running = false
             }
-            else -> { println("Opción inválida.") }
+            else -> { println("Opcion invalida.") }
         }
         println()
     }
@@ -35,7 +35,7 @@ fun showMenu() {
     println("4. Eliminar tarea")
     println("5. Ver tareas completadas")
     println("6. Ver tareas pendientes")
-    println("8. Mostrar estadísticas")
+    println("8. Mostrar estadisticas")
     println("9. Salir")
     println()
 }
