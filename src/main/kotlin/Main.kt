@@ -43,6 +43,10 @@ fun main() {
             }
 
             7 -> {
+                searchTasks()
+            }
+
+            8 -> {
                 println("Saliendo del programa...")
                 running = false
             }
@@ -65,7 +69,8 @@ fun showMenu() {
     println("4. Eliminar tarea")
     println("5. Ver tareas completadas")
     println("6. Ver tareas pendientes")
-    println("7. Salir")
+    println("7. Buscar tareas")
+    println("8. Salir")
     println()
 }
 
@@ -219,5 +224,44 @@ fun showPendingTasks() {
     pendingTasks.forEach { task ->
 
         println("${task.id}. ${task.title} - Prioridad: ${task.priority}")
+    }
+}
+
+fun searchTasks() {
+
+    if (tasks.isEmpty()) {
+
+        println("No hay tareas registradas.")
+        return
+    }
+
+    print("Ingrese una palabra clave: ")
+
+    val keyword = readLine()?.trim()
+
+    if (keyword.isNullOrEmpty()) {
+
+        println("La búsqueda no puede estar vacía.")
+        return
+    }
+
+    val results = tasks.filter {
+
+        it.title.contains(keyword, ignoreCase = true)
+    }
+
+    if (results.isEmpty()) {
+
+        println("No se encontraron tareas.")
+        return
+    }
+
+    println("===== RESULTADOS DE BÚSQUEDA =====")
+
+    results.forEach { task ->
+
+        val status = if (task.completed) "[Completada]" else "[Pendiente]"
+
+        println("${task.id}. ${task.title} $status - Prioridad: ${task.priority}")
     }
 }
