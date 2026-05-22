@@ -1,0 +1,2 @@
+1;Estudiar Kotlin;false;Alta
+2;Hacer el proyecto;false;Alta

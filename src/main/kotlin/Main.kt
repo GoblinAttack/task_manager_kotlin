@@ -1,8 +1,8 @@
 package org.example
 
-val tasks = mutableListOf<Task>()
+val tasks = loadTasks()
 
-var nextId = 1
+var nextId = if (tasks.isEmpty()) 1 else tasks.maxOf { it.id } + 1
 
 fun main() {
 
@@ -105,6 +105,7 @@ fun addTask() {
     )
 
     tasks.add(task)
+    saveTasks(tasks)
 
     println("Tarea agregada correctamente.")
 
@@ -148,6 +149,7 @@ fun completeTask() {
     if (task != null) {
 
         task.completed = true
+        saveTasks(tasks)
         println("Tarea marcada como completada.")
 
     } else {
@@ -175,7 +177,7 @@ fun deleteTask() {
     if (task != null) {
 
         tasks.remove(task)
-
+        saveTasks(tasks)
         println("Tarea eliminada correctamente.")
 
     } else {
