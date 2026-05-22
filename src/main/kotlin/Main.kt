@@ -35,6 +35,14 @@ fun main() {
             }
 
             5 -> {
+                showCompletedTasks()
+            }
+
+            6 -> {
+                showPendingTasks()
+            }
+
+            7 -> {
                 println("Saliendo del programa...")
                 running = false
             }
@@ -55,7 +63,9 @@ fun showMenu() {
     println("2. Listar tareas")
     println("3. Completar tarea")
     println("4. Eliminar tarea")
-    println("5. Salir")
+    println("5. Ver tareas completadas")
+    println("6. Ver tareas pendientes")
+    println("7. Salir")
     println()
 }
 
@@ -71,10 +81,27 @@ fun addTask() {
         return
     }
 
+    print("Ingrese la prioridad (Alta, Media, Baja): ")
+
+    val priorityInput = readLine()?.trim()?.uppercase()
+
+    val priority = when (priorityInput) {
+
+        "ALTA" -> "Alta"
+        "MEDIA" -> "Media"
+        "BAJA" -> "Baja"
+
+        else -> {
+            println("Prioridad inválida. Se asignará prioridad Media.")
+            "Media"
+        }
+    }
+
     val task = Task(
         id = nextId,
         title = title,
-        completed = false
+        completed = false,
+        priority = priority
     )
 
     tasks.add(task)
@@ -98,7 +125,7 @@ fun listTasks() {
 
         val status = if (task.completed) "[Completada]" else "[Pendiente]"
 
-        println("${task.id}. ${task.title} $status")
+        println("${task.id}. ${task.title} $status - Prioridad: ${task.priority}")
     }
 }
 
@@ -154,5 +181,41 @@ fun deleteTask() {
     } else {
 
         println("No se encontró una tarea con ese ID.")
+    }
+}
+
+fun showCompletedTasks() {
+
+    val completedTasks = tasks.filter { it.completed }
+
+    if (completedTasks.isEmpty()) {
+
+        println("No hay tareas completadas.")
+        return
+    }
+
+    println("===== TAREAS COMPLETADAS =====")
+
+    completedTasks.forEach { task ->
+
+        println("${task.id}. ${task.title} - Prioridad: ${task.priority}")
+    }
+}
+
+fun showPendingTasks() {
+
+    val pendingTasks = tasks.filter { !it.completed }
+
+    if (pendingTasks.isEmpty()) {
+
+        println("No hay tareas pendientes.")
+        return
+    }
+
+    println("===== TAREAS PENDIENTES =====")
+
+    pendingTasks.forEach { task ->
+
+        println("${task.id}. ${task.title} - Prioridad: ${task.priority}")
     }
 }
