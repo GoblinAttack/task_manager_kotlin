@@ -23,15 +23,15 @@ fun main() {
             }
 
             2 -> {
-                println("Listar tareas próximamente...")
+                listTasks()
             }
 
             3 -> {
-                println("Marcar tarea como completada próximamente...")
+                completeTask()
             }
 
             4 -> {
-                println("Eliminar tarea próximamente...")
+                deleteTask()
             }
 
             5 -> {
@@ -82,4 +82,77 @@ fun addTask() {
     println("Tarea agregada correctamente.")
 
     nextId++
+}
+
+fun listTasks() {
+
+    if (tasks.isEmpty()) {
+
+        println("No hay tareas registradas.")
+        return
+    }
+
+    println("===== LISTA DE TAREAS =====")
+
+    tasks.forEach { task ->
+
+        val status = if (task.completed) "[Completada]" else "[Pendiente]"
+
+        println("${task.id}. ${task.title} $status")
+    }
+}
+
+fun completeTask() {
+
+    if (tasks.isEmpty()) {
+
+        println("No hay tareas registradas.")
+        return
+    }
+
+    listTasks()
+
+    print("Ingrese el ID de la tarea completada: ")
+
+    val taskId = readLine()?.toIntOrNull()
+
+    val task = tasks.find { it.id == taskId }
+
+    if (task != null) {
+
+        task.completed = true
+        println("Tarea marcada como completada.")
+
+    } else {
+
+        println("No se encontró una tarea con ese ID.")
+    }
+}
+
+fun deleteTask() {
+
+    if (tasks.isEmpty()) {
+
+        println("No hay tareas registradas.")
+        return
+    }
+
+    listTasks()
+
+    print("Ingrese el ID de la tarea que desea eliminar: ")
+
+    val taskId = readLine()?.toIntOrNull()
+
+    val task = tasks.find { it.id == taskId }
+
+    if (task != null) {
+
+        tasks.remove(task)
+
+        println("Tarea eliminada correctamente.")
+
+    } else {
+
+        println("No se encontró una tarea con ese ID.")
+    }
 }
