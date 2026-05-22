@@ -157,3 +157,26 @@ fun searchTasks() {
         println("${task.id}. ${task.title} $status - Prioridad: ${task.priority}")
     }
 }
+
+fun showStatistics() {
+
+    if (tasks.isEmpty()) {
+        println("No hay tareas registradas.")
+        return
+    }
+
+    val totalTasks = tasks.size
+    val completedTasks = tasks.count { it.completed }
+    val pendingTasks = tasks.count { !it.completed }
+    val highPriorityTasks = tasks.count { it.priority == "Alta" }
+    val mediumPriorityTasks = tasks.count { it.priority == "Media" }
+    val lowPriorityTasks = tasks.count { it.priority == "Baja" }
+
+    println("===== ESTADÍSTICAS =====")
+    println("Total de tareas: $totalTasks")
+    println("Tareas completadas: $completedTasks")
+    println("Tareas pendientes: $pendingTasks")
+    println("Prioridad Alta: $highPriorityTasks")
+    println("Prioridad Media: $mediumPriorityTasks")
+    println("Prioridad Baja: $lowPriorityTasks")
+}

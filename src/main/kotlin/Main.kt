@@ -16,7 +16,8 @@ fun main() {
             5 -> { showCompletedTasks() }
             6 -> { showPendingTasks() }
             7 -> { searchTasks() }
-            8 -> {
+            8 -> showStatistics()
+            9 -> {
                 println("Saliendo del programa...")
                 running = false
             }
@@ -34,7 +35,7 @@ fun showMenu() {
     println("4. Eliminar tarea")
     println("5. Ver tareas completadas")
     println("6. Ver tareas pendientes")
-    println("7. Buscar tareas")
-    println("8. Salir")
+    println("8. Mostrar estadísticas")
+    println("9. Salir")
     println()
 }
