@@ -17,12 +17,13 @@ fun addTask() {
     val priorityInput = readLine()?.trim()?.uppercase()
 
     val priority = when (priorityInput) {
-        "ALTA" -> "Alta"
-        "MEDIA" -> "Media"
-        "BAJA" -> "Baja"
+        "ALTA" -> Priority.ALTA
+        "MEDIA" -> Priority.MEDIA
+        "BAJA" -> Priority.BAJA
+
         else -> {
-            println("Prioridad inválida. Se asignará prioridad Media.")
-            "Media"
+            println("Prioridad inválida. Se asignará prioridad MEDIA.")
+            Priority.MEDIA
         }
     }
 
@@ -168,9 +169,9 @@ fun showStatistics() {
     val totalTasks = tasks.size
     val completedTasks = tasks.count { it.completed }
     val pendingTasks = tasks.count { !it.completed }
-    val highPriorityTasks = tasks.count { it.priority == "Alta" }
-    val mediumPriorityTasks = tasks.count { it.priority == "Media" }
-    val lowPriorityTasks = tasks.count { it.priority == "Baja" }
+    val highPriorityTasks = tasks.count { it.priority == Priority.ALTA }
+    val mediumPriorityTasks = tasks.count { it.priority == Priority.MEDIA }
+    val lowPriorityTasks = tasks.count { it.priority == Priority.BAJA }
 
     println("===== ESTADÍSTICAS =====")
     println("Total de tareas: $totalTasks")

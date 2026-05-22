@@ -38,7 +38,7 @@ fun loadTasks(): MutableList<Task> {
                 id = parts[0].toInt(),
                 title = parts[1],
                 completed = parts[2].toBoolean(),
-                priority = parts[3]
+                priority = Priority.valueOf(parts[3])
             )
 
             tasks.add(task)

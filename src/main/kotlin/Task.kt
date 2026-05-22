@@ -4,5 +4,5 @@ data class Task(
     val id: Int,
     val title: String,
     var completed: Boolean,
-    val priority: String
+    val priority: Priority
 )
